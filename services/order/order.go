@@ -1,4 +1,4 @@
-package services
+package order
 
 import (
 	"context"
@@ -15,8 +15,8 @@ import (
 type OrderConfiguration func(os *OrderService) error
 
 type OrderService struct {
-	customers customer.CustomerRepository
-	products  product.ProductRepository
+	customers customer.Repository
+	products  product.Repository
 
 	// billing billing.Service
 }
@@ -37,7 +37,7 @@ func NewOrderService(cfgs ...OrderConfiguration) (*OrderService, error) {
 }
 
 // * WithCustomerRepository akan menerapkan sebuah customer repository ke OrderService
-func WithCustomerRepository(cr customer.CustomerRepository) OrderConfiguration {
+func WithCustomerRepository(cr customer.Repository) OrderConfiguration {
 	// Todo: akan me-return fungsi yg cocok dengan orderconfiguration alias
 	return func(os *OrderService) error {
 		os.customers = cr
@@ -98,4 +98,16 @@ func (o *OrderService) CreateOrder(customerID uuid.UUID, productsIDs []uuid.UUID
 	}
 	log.Printf("Customer: %s has ordered %d products", c.GetID(), len(products))
 	return total, nil
+}
+
+func (o *OrderService) AddCustomer(name string) (uuid.UUID, error) {
+	c, err := customer.NewCustomer(name)
+	if err != nil {
+		return uuid.Nil, err
+	}
+	err = o.customers.Add(c)
+	if err != nil {
+		return uuid.Nil, err
+	}
+	return c.GetID(), nil
 }

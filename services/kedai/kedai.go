@@ -1,8 +1,9 @@
-package services
+package kedai
 
 import (
 	"log"
 
+	"github.com/Qmun14/kedai/services/order"
 	"github.com/google/uuid"
 )
 
@@ -10,7 +11,7 @@ type KedaiConfiguration func(os *Kedai) error
 
 type Kedai struct {
 	// orderservice untuk menerima pesanan
-	OrderService *OrderService
+	OrderService *order.OrderService
 
 	// BillingService
 	BillingService interface{}
@@ -28,7 +29,7 @@ func NewKedai(cfgs ...KedaiConfiguration) (*Kedai, error) {
 	return k, nil
 }
 
-func WithOrderService(os *OrderService) KedaiConfiguration {
+func WithOrderService(os *order.OrderService) KedaiConfiguration {
 	return func(k *Kedai) error {
 		k.OrderService = os
 		return nil

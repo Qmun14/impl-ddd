@@ -11,7 +11,7 @@ var (
 	ErrProductAlredyExist = errors.New("Product is already exist")
 )
 
-type ProductRepository interface {
+type Repository interface {
 	GetAll() ([]Product, error)
 	GetByID(id uuid.UUID) (Product, error)
 	Add(product Product) error
