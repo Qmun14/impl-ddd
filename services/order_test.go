@@ -3,26 +3,27 @@ package services
 import (
 	"testing"
 
-	"github.com/Qmun14/ddd-go/aggregate"
+	"github.com/Qmun14/kedai/domain/customer"
+	"github.com/Qmun14/kedai/domain/product"
 	"github.com/google/uuid"
 )
 
-func init_Products(t *testing.T) []aggregate.Product {
-	coffe, err := aggregate.NewProduct("Coffe", "Healthy Baverage", 1.99)
+func init_Products(t *testing.T) []product.Product {
+	coffe, err := product.NewProduct("Coffe", "Healthy Baverage", 1.99)
 	if err != nil {
 		t.Fatal(err)
 	}
-	potato, err := aggregate.NewProduct("Fried Potatoes", "Delicious snack", 1.45)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	peanuts, err := aggregate.NewProduct("Peanuts", "Healthy snack", 1.15)
+	potato, err := product.NewProduct("Fried Potatoes", "Delicious snack", 1.45)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	return []aggregate.Product{
+	peanuts, err := product.NewProduct("Peanuts", "Healthy snack", 1.15)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return []product.Product{
 		coffe, potato, peanuts,
 	}
 }
@@ -39,7 +40,7 @@ func TestOrder_NewOrderService(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	cust, err := aggregate.NewCustomer("Ma'mun")
+	cust, err := customer.NewCustomer("Ma'mun")
 
 	if err != nil {
 		t.Error(err)

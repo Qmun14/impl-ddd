@@ -4,12 +4,11 @@ import (
 	"context"
 	"log"
 
-	"github.com/Qmun14/ddd-go/aggregate"
-	"github.com/Qmun14/ddd-go/domain/customer"
-	"github.com/Qmun14/ddd-go/domain/customer/memory"
-	"github.com/Qmun14/ddd-go/domain/customer/mysql"
-	"github.com/Qmun14/ddd-go/domain/product"
-	prodmem "github.com/Qmun14/ddd-go/domain/product/memory"
+	"github.com/Qmun14/kedai/domain/customer"
+	"github.com/Qmun14/kedai/domain/customer/memory"
+	"github.com/Qmun14/kedai/domain/customer/mysql"
+	"github.com/Qmun14/kedai/domain/product"
+	prodmem "github.com/Qmun14/kedai/domain/product/memory"
 	"github.com/google/uuid"
 )
 
@@ -63,7 +62,7 @@ func WithSqlCustomerRepository(ctx context.Context, connStr string) OrderConfigu
 
 }
 
-func WithMemoryProductRepository(products []aggregate.Product) OrderConfiguration {
+func WithMemoryProductRepository(products []product.Product) OrderConfiguration {
 	return func(os *OrderService) error {
 		pr := prodmem.New()
 
@@ -84,7 +83,7 @@ func (o *OrderService) CreateOrder(customerID uuid.UUID, productsIDs []uuid.UUID
 		return 0, err
 	}
 	// Todo: Get each Product,
-	var products []aggregate.Product
+	var products []product.Product
 	var total float64
 
 	for _, id := range productsIDs {

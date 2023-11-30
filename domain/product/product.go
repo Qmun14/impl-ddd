@@ -1,9 +1,9 @@
-package aggregate
+package product
 
 import (
 	"errors"
 
-	"github.com/Qmun14/ddd-go/entity"
+	"github.com/Qmun14/kedai"
 	"github.com/google/uuid"
 )
 
@@ -12,7 +12,7 @@ var (
 )
 
 type Product struct {
-	item     *entity.Item
+	item     *kedai.Item
 	price    float64
 	quantity int
 }
@@ -22,7 +22,7 @@ func NewProduct(name, description string, price float64) (Product, error) {
 		return Product{}, ErrMissingValue
 	}
 	return Product{
-		item: &entity.Item{
+		item: &kedai.Item{
 			ID:          uuid.New(),
 			Name:        name,
 			Description: description,
@@ -36,7 +36,7 @@ func (p Product) GetID() uuid.UUID {
 	return p.item.ID
 }
 
-func (p Product) GetItem() *entity.Item {
+func (p Product) GetItem() *kedai.Item {
 	return p.item
 }
 

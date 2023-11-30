@@ -1,4 +1,4 @@
-package valueobject
+package kedai
 
 import (
 	"time"

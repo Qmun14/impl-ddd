@@ -1,4 +1,4 @@
-module github.com/Qmun14/ddd-go
+module github.com/Qmun14/kedai
 
 go 1.21.0
 

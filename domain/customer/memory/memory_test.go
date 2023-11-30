@@ -4,8 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/Qmun14/ddd-go/aggregate"
-	"github.com/Qmun14/ddd-go/domain/customer"
+	"github.com/Qmun14/kedai/domain/customer"
 	"github.com/google/uuid"
 )
 
@@ -16,7 +15,7 @@ func TestMemory_GetCustomer(t *testing.T) {
 		expectedErr error
 	}
 
-	c, err := aggregate.NewCustomer("Ma'mun")
+	c, err := customer.NewCustomer("Ma'mun")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -24,7 +23,7 @@ func TestMemory_GetCustomer(t *testing.T) {
 	id := c.GetID()
 
 	repo := MemoryRepository{
-		customers: map[uuid.UUID]aggregate.Customer{
+		customers: map[uuid.UUID]customer.Customer{
 			id: c,
 		},
 	}

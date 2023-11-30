@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/Qmun14/ddd-go/aggregate"
+	"github.com/Qmun14/kedai/domain/customer"
 	"github.com/google/uuid"
 )
 
@@ -24,7 +24,7 @@ func Test_Kedai(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	cust, err := aggregate.NewCustomer("Ma'mun")
+	cust, err := customer.NewCustomer("Ma'mun")
 	if err != nil {
 		t.Fatal(err)
 	}

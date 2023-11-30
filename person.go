@@ -1,5 +1,5 @@
 // Package entities ini menampung semua entitas yang dibagikan di seluruh sub domain
-package entity
+package kedai
 
 import "github.com/google/uuid"
 
